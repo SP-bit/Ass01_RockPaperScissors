@@ -60,10 +60,9 @@ public class Main
             {
                 System.out.println("Player A wins!");
             }
-            else
-            {
-                System.out.println("Player B wins!");
-            }
+            else if ((aInput.equalsIgnoreCase("R") && bInput.equalsIgnoreCase("P")) ||
+                    (aInput.equalsIgnoreCase("S") && bInput.equalsIgnoreCase("R")) ||
+                    (aInput.equalsIgnoreCase("P") && bInput.equalsIgnoreCase("S")))
             System.out.print("Play again (Y/N): ");
             response = in.next();
             playAgain = response.equalsIgnoreCase("Y");
