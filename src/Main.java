@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 import java.util.Random;
 public class Main
@@ -7,52 +6,61 @@ public class Main
     {
         Scanner in = new Scanner(System.in);
         Random rand = new Random();
-        boolean PlayAgain = true;
-        String playerInput = "";
-        String[] options = {"rock", "paper", "scissors"};
-        String computerInput;
-        while (PlayAgain)
+        boolean playAgain = true;
+        String myMove = "";
+        String[] options = {"rock", "paper", "scissors"}; // list with trivial use
+        String compMove;
+        while (playAgain)
         {
-            boolean CorrectInput = false;
+            boolean correctInput = false;
             System.out.println("Choose rock, paper, or scissors: ");
-            while(!CorrectInput)
+            while(!correctInput)
             {
-                playerInput = in.nextLine();
-                if(playerInput.equals(options[0])||playerInput.equals(options[1])||playerInput.equalsIgnoreCase(options[2]))
+                myMove = in.nextLine(); // input + validated to make sure its right
+                boolean valid = false;
+                for(String option : options)
                 {
-                    CorrectInput = true;
+                    if(myMove.equalsIgnoreCase(option))
+                    {
+                        valid = true;
+                        break;
+                    }
+                }
+                if(valid)
+                {
+                    correctInput = true;
                 }
                 else
                 {
                     System.out.println("Not a valid input, please try again");
                 }
             }
-            computerInput = options[rand.nextInt(3)];
-            System.out.println("The computer chose: " + computerInput);
-            String result = getResult(playerInput, computerInput);
-            System.out.println("You " + result);
+            compMove = options[rand.nextInt(3)];
+            System.out.println("The computer chose: " + compMove);
+            String result = getResult(myMove, compMove);
+            System.out.println("Game over! Looks like you " + result);
             System.out.println("Do you want to play again (Y/N): ");
-            String PlayAgainInput = in.nextLine();
-            if(PlayAgainInput.equalsIgnoreCase("N"))
+            String playAgainInput = in.nextLine();
+            if(playAgainInput.equalsIgnoreCase("N"))
             {
-                PlayAgain = false;
+                playAgain = false;
             }
         }
         in.close();
     }
-    public static String getResult(String player, String computer)
+    public static String getResult(String player, String computer) // procedure
     {
         if (player.equals(computer))
         {
-            return("tied.");
+            return("tied!");
         }
         else if (player.equals("rock") && computer.equals("scissors") || player.equals("scissors") && computer.equals("paper") || player.equals("paper") && computer.equals("rock"))
         {
-            return("won.");
+            return("won!");
         }
         else
         {
-            return "lost.";
+            return "lost!";
         }
     }
 }
